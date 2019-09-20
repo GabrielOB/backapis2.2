@@ -37,15 +37,15 @@ return [
     'guards' => [
         'api' => [
             'driver' => 'jwt',
-            'provider' => 'users',
+            'provider' => 'usuarios',
         ],
     ],
 
     // optional, if use eloquent
     'providers' => [
-        'users' => [
+        'usuarios' => [
             'driver' => 'eloquent',
-            'model'  =>  App\User::class,
+            'model'  =>  App\Usuario::class,
         ]
     ],
 ];
