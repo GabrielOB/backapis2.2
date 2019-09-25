@@ -57,7 +57,7 @@ class UsuarioController extends Controller
             'password' => 'required',
             'cpf' => 'required',
             'endereco' => 'required',
-            'telefone' => 'requried'
+            'telefone' => 'required'
         ]);
         //Inserindo usuário
         $usuario = new Usuario;
