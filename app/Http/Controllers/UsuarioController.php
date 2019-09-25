@@ -32,7 +32,7 @@ class UsuarioController extends Controller
             'password' => 'required'
         ]);
 
-        if(! $token = $this->jwt->claims(['email' => $request->email])->attempt($request->only('email', 'password'))){
+        if(! $token = $this->jwt->claims(['email' => $request->get("email")])->attempt($request->only('email', 'password'))){
             return response()->json(['Usuario não encontrado'], 404);
         }
 
@@ -63,7 +63,7 @@ class UsuarioController extends Controller
 
         //Inserindo usuário
         $usuario = new Usuario;
-        $usuario->email = $request->email;
+        $usuario->email = $request->get("email");
         $usuario->usuario = $request->usuario;
         $usuario->password = Hash::make($request->password);
         $usuario->cpf = $request->cpf;
