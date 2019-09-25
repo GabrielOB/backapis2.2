@@ -27,7 +27,7 @@ class UsuarioController extends Controller
     }
 
     public function usuarioLogin(Request $request){
-        $this->validate($request, [
+        $request->validate([
             'email' => 'required|email|max:255',
             'password' => 'required'
         ]);
@@ -51,7 +51,7 @@ class UsuarioController extends Controller
 
     public function cadastrarUsuario(Request $request){
         //Validação
-        $this->validate($request, [
+        $request->validate([
             'usuario' => 'required|min:5|max:40',
             'email' => 'required|email|unique:usuarios,email',
             'password' => 'required',
