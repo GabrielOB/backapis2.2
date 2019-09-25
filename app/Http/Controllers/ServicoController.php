@@ -53,9 +53,8 @@ class ServicoController extends Controller
     //
 
     public function deletarServico($id){
-        $servico = Servico::find($id);
-        $servico->delete();
-        return response()->json('Deletado com sucesso', 200);
+        Servico::find($id)->delete();
+        return response()->json(['msg' => 'Deletado com sucesso'], 200);
     }
 
 }
