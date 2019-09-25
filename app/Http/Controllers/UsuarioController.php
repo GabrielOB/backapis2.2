@@ -27,12 +27,12 @@ class UsuarioController extends Controller
     }
 
     public function usuarioLogin(Request $request){
-        $request->validate([
+        $this->validate($request, [
             'email' => 'required|email|max:255',
             'password' => 'required'
         ]);
 
-        if(! $token = $this->jwt->claims(['email' => $request->get("email")])->attempt($request->only('email', 'password'))){
+        if(! $token = $this->jwt->claims(['email' => $request->email])->attempt($request->only('email', 'password'))){
             return response()->json(['Usuario não encontrado'], 404);
         }
 
@@ -51,7 +51,7 @@ class UsuarioController extends Controller
 
     public function cadastrarUsuario(Request $request){
         //Validação
-        $request->validate([
+        $this->validate($request, [
             'usuario' => 'required|min:5|max:40',
             'email' => 'required|email|unique:usuarios,email',
             'password' => 'required',
@@ -63,7 +63,7 @@ class UsuarioController extends Controller
 
         //Inserindo usuário
         $usuario = new Usuario;
-        $usuario->email = $request->get("email");
+        $usuario->email = $request->email;
         $usuario->usuario = $request->usuario;
         $usuario->password = Hash::make($request->password);
         $usuario->cpf = $request->cpf;
