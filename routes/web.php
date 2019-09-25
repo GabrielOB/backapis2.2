@@ -26,7 +26,7 @@ $router->group(['prefix' => 'usuario'], function () use($router){
 
     $router->delete('/{id}/deletar', 'UsuarioController@deletarUsuario');
 
-    $router->post('{id}/comentario/cadastrar', 'ComentarioController@cadastrarComentario');
+    $router->post('{id}/comentario', 'ComentarioController@cadastrarComentario');
 });
 
 
