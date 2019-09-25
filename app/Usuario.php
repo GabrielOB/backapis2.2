@@ -38,5 +38,10 @@ class Usuario extends Model implements AuthenticatableContract, AuthorizableCont
     public function getJWTCustomClaims(){
         return [];
     }
+
+    public function servicos()
+    {
+        return $this->belongToMany(Servico::class, 'usuario_servico');
+    }
 }
 

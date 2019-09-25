@@ -59,6 +59,8 @@ class UsuarioController extends Controller
             'endereco' => 'required',
             'telefone' => 'required'
         ]);
+
+
         //Inserindo usuário
         $usuario = new Usuario;
         $usuario->email = $request->email;
