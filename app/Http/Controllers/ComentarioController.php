@@ -31,13 +31,28 @@ class ComentarioController extends Controller
             'comentario'
         ]);
 
-        $comentario = new Comentario;
-        $comentario->prestador_id = $resquest->prestador_id;
+        $comentario = Comentario::create([
+            'prestador_id' => $resquest->prestador_id,
+            'cliente_id' => $usuario->id,
+            'comentario' => $resquest->comentario,
+        ]);
+        /* $comentario->prestador_id = $resquest->prestador_id;
         $comentario->cliente_id = $usuario->id;
-        $comentario->comentario = $resquest->comentario;
+        $comentario->comentario = $resquest->comentario; */
 
-        $comentario->save();
+        // $comentario->save();
         return response()->json($comentario);
 
+    }
+
+    public function atualizarComentario($id, Request $resquest){
+        $this->validate($resquest, [
+            'comentario'
+        ]);
+
+        $comentario = Comentario::find($id)->update([
+            'comentario' => $resquest->comentario
+        ]);
+        return response()->json($comentario);
     }
 }
