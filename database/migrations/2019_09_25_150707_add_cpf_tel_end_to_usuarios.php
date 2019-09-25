@@ -14,9 +14,9 @@ class AddCpfTelEndToUsuarios extends Migration
     public function up()
     {
         Schema::table('usuarios', function (Blueprint $table) {
-            $table->string('endereco')->nullable();
-            $table->string('cpf', 14)->nullable();
-            $table->string('telefone', 15)->nullable();
+            $table->string('endereco');
+            $table->string('cpf', 14);
+            $table->string('telefone', 15);
         });
     }
 

@@ -35,7 +35,7 @@ class UsuarioController extends Controller
         if(! $token = $this->jwt->claims(['email' => $request->email])->attempt($request->only('email', 'password'))){
             return response()->json(['Usuario não encontrado'], 404);
         }
-        
+
         return response()->json(compact('token'));
     }
 
@@ -54,13 +54,19 @@ class UsuarioController extends Controller
         $this->validate($request, [
             'usuario' => 'required|min:5|max:40',
             'email' => 'required|email|unique:usuarios,email',
-            'password' => 'required'
+            'password' => 'required',
+            'cpf' => 'required',
+            'endereco' => 'required',
+            'telefone' => 'requried'
         ]);
         //Inserindo usuário
         $usuario = new Usuario;
         $usuario->email = $request->email;
         $usuario->usuario = $request->usuario;
         $usuario->password = Hash::make($request->password);
+        $usuario->cpf = $request->cpf;
+        $usuario->telefone = $request->telefone;
+        $usuario->endereco = $request->endereco;
 
         //Salvar registro no banco
         $usuario->save();
