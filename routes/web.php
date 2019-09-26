@@ -29,6 +29,12 @@ $router->group(['prefix' => 'usuario'], function () use($router){
     $router->post('/{id}/comentario', 'ComentarioController@cadastrarComentario');
 
     $router->put('/{id}/comentario', 'ComentarioController@atualizarComentario');
+
+    $router->delete('/{id}/comentario', 'ComentarioController@deletarComentario');
+
+    $router->get('/{id}/comentario/{id_comentario}', 'ComentarioController@showOneComentario');
+
+    $router->get('/{id}/comentario/', 'ComentarioController@showAllComentario');
 });
 
 

@@ -55,4 +55,19 @@ class ComentarioController extends Controller
         ]);
         return response()->json($comentario);
     }
+
+    public function deletarComentario($id, Request $resquest){
+        Comentario::find($id)->delete();
+        return response()->json(['msg' => 'Deletado com sucesso'], 200);
+    }
+
+    public function showOne($id_comentario, Request $resquest){
+        $comentario = Comentario::find($id_comentario);
+        return response()->json($comentario);
+    }
+
+    public function showAll(){
+        return response()->json(Comentario::all());
+
+    }
 }
