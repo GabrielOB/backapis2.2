@@ -11,6 +11,7 @@ class Comentario extends Model
    ];
 
    protected $casts = [
-       'prestador_id' => 'integer'
+       'prestador_id' => 'integer',
+       'cliente_id' => 'integer'
    ];
 }
