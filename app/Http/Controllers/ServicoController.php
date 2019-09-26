@@ -37,7 +37,7 @@ class ServicoController extends Controller
             'valorBase' => $request->valorBase
         ]);
 
-        return response()->json($usuario);
+        return response()->json($servico);
     }
 
     public function mostrarServico($id){
@@ -57,7 +57,7 @@ class ServicoController extends Controller
             'valorBase'
         ]);
 
-        return response()->json($usuario);
+        return response()->json($servico);
     }
     //
 
