@@ -48,9 +48,7 @@ class ServicoController extends Controller
     public function vincularServico(Request $request){
         $user = Auth::user();
         $servico = Servico::find($request->servico_id);
-
-        $usuario = Usuario::find([$user->id]);
-        
+        $servico->usuarios()->attach($user);
     }
 
     public function mostrarServico(){
