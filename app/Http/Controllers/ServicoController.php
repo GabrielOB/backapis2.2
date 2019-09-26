@@ -40,8 +40,8 @@ class ServicoController extends Controller
         return response()->json($servico);
     }
 
-    public function mostrarServico($id){
-        return response()->json(Servico::find($id));
+    public function mostrarServico(){
+        return response()->json(Servico::all());
     }
 
     public function atualizarServico($id, Request $request){
