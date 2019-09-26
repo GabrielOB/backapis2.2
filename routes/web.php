@@ -32,9 +32,9 @@ $router->group(['prefix' => 'usuario'], function () use($router){
 
     $router->delete('/{id}/comentario', 'ComentarioController@deletarComentario');
 
-    $router->get('/{id}/comentario/{id_comentario}', 'ComentarioController@showOneComentario');
+    $router->get('/{id}/comentario/{id_comentario}', 'ComentarioController@showOne');
 
-    $router->get('/{id}/comentario/', 'ComentarioController@showAllComentario');
+    $router->get('/{id}/comentario', 'ComentarioController@showAll');
 });
 
 
