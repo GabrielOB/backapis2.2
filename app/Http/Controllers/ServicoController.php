@@ -39,7 +39,7 @@ class ServicoController extends Controller
             'valorBase' => $request->valorBase
         ]);
 
-        $usuario = Usuario::find([$servico->id]);
+        $usuario = Usuario::find([1]);
         $servico->usuarios()->attach($usuario);
 
         return response()->json($servico);
