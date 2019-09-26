@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Usuario;
+use App\Servico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ServicoController extends Controller
 {
+
+    protected $jwt;
+
+    public function __construct(JWTAuth $jwt)
+    {
+        $this->jwt = $jwt;
+        $this->middleware('auth:api');
+    }
 
     public function mostrarTodosServicos(){
         return response()->json(Servico::all());
