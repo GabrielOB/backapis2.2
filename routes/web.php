@@ -53,3 +53,5 @@ $router->group(['prefix' => 'servico'], function () use($router){
 
     $router->delete('/{id}/deletar', 'ServicoController@deletarServico');
 });
+
+$router->get('/servicos', 'ServicoController@mostrarTodosServicos');
