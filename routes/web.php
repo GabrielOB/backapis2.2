@@ -37,3 +37,13 @@ $router->post('/login', 'UsuarioController@usuarioLogin');
 $router->post('/info', 'UsuarioController@mostrarUsuarioAutenticado');
 
 $router->post('/logout', 'UsuarioController@usuarioLogout');
+
+$router->group(['prefix' => 'servico'], function () use($router){
+    $router->post('/cadastrar', 'ServicoController@cadastrarServico');
+
+    $router->get('/{id}', 'ServicoController@mostrarServico');
+
+    $router->put('/{id}/atualizar', 'ServicoController@atualizarServico');
+
+    $router->delete('/{id}/deletar', 'ServicoController@deletarServico');
+});
