@@ -80,23 +80,19 @@ class UsuarioController extends Controller
     }
 
     public function atualizarUsuario($id, Request $request){
-        $usuario = Usuario::find($id);
-
-        $usuario->email = $request->email;
-        $usuario->usuario = $request->usuario;
-        $usuario->password = $request->password;
-
-        //Utilizar save
-        $usuario->save();
+        $usuario = Usuario::find($id)->update([
+            'email' => $request->email,
+            'usuario' => $request->usuario,
+            'password' => $request->password
+        ]);
 
         return response()->json($usuario);
     }
     //
 
     public function deletarUsuario($id){
-        $usuario = Usuario::find($id);
-        $usuario->delete();
-        return response()->json('Deletado com sucesso', 200);
+        $usuario = Usuario::find($id)->delete();
+        return response()->json(['msg' => 'Deletado com sucesso'], 200);
     }
 
     public function usuarioLogout(){
