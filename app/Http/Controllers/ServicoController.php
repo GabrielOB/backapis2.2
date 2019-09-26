@@ -26,7 +26,7 @@ class ServicoController extends Controller
 
     public function cadastrarServico(Request $request){
         $user = Auth::user();
-
+        
         //Validação
         $this->validate($request, [
             'nome' => 'required|min:5|max:100',
@@ -39,10 +39,18 @@ class ServicoController extends Controller
             'valorBase' => $request->valorBase
         ]);
 
-        $usuario = Usuario::find([$user->id]);
-        $servico->usuarios()->attach($usuario);
+        //$usuario = Usuario::find([$user->id]);
+        $servico->usuarios()->attach($user);
 
         return response()->json($servico);
+    }
+
+    public function vincularServico(Request $request){
+        $user = Auth::user();
+        $servico = Servico::find($request->servico_id);
+
+        $usuario = Usuario::find([$user->id]);
+        
     }
 
     public function mostrarServico(){
