@@ -23,6 +23,6 @@ class Servico extends Model implements AuthenticatableContract, AuthorizableCont
 
     public function usuarios()
     {
-        return $this->belongToMany('APP\Usuario', 'usuario_servico');
+        return $this->belongsToMany('APP\Usuario', 'usuario_servico');
     }
 }
