@@ -101,5 +101,12 @@ class UsuarioController extends Controller
         return response()->json('Usuario deslogou com sucesso.');
     }
 
+    public function removerServico(Ususario $usuario, $id)
+    {
+        $servico = Servico::find($id);
+        $usuario->servicos()->detach($servico);
+        return response()->json('Categoria deletada com sucesso.')
+    }
+
 }
 

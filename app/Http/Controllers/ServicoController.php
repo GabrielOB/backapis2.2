@@ -38,8 +38,8 @@ class ServicoController extends Controller
             'nome' => $request->nome,
             'valorBase' => $request->valorBase
         ]);
-
-        //$usuario = Usuario::find([$user->id]);
+        
+        // Vincular serviço ao usuario;
         $servico->usuarios()->attach($user);
 
         return response()->json($servico);
@@ -49,8 +49,10 @@ class ServicoController extends Controller
         $user = Auth::user();
         $servico = Servico::find($request->servico_id);
         $servico->usuarios()->attach($user);
+        return response()->json('Serviço vinculado com sucesso');
     }
 
+    //  fazer
     public function mostrarServico(){
         return response()->json(Servico::all());
     }
