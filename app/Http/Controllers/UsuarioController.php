@@ -101,11 +101,12 @@ class UsuarioController extends Controller
         return response()->json('Usuario deslogou com sucesso.');
     }
 
+    //Acho que esse método pertence ao controller de serviços
     public function removerServico(Ususario $usuario, $id)
     {
         $servico = Servico::find($id);
         $usuario->servicos()->detach($servico);
-        return response()->json('Categoria deletada com sucesso.')
+        return response()->json('Categoria deletada com sucesso.');
     }
 
 }
