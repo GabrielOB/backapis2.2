@@ -57,9 +57,10 @@ class ServicoController extends Controller
         $usuario = Auth::user();
         $arrayServicos = array();
         foreach ($usuario->servicos as $servico) {
+            $servico = array_diff($servico, ['pivot','created_at','updated_at']);
             $arrayServicos[] = $servico;
         }
-        return response()->json($usuario);
+        return response()->json($arrayServicos);
     }
 
     public function atualizarServico($id, Request $request){
