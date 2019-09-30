@@ -43,5 +43,9 @@ class Usuario extends Model implements AuthenticatableContract, AuthorizableCont
     {
         return $this->belongsToMany('App\Servico', 'usuario_servico');
     }
+
+    public function avaliacoes(){
+        return $this->hasMany('App\Avaliacao');
+    }
 }
 
