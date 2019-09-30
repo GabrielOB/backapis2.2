@@ -52,7 +52,7 @@ class ServicoController extends Controller
         return response()->json('Serviço vinculado com sucesso');
     }
 
-    //  fazer
+    
     public function mostrarServico(){
         $usuario = Auth::user();
         $arrayServicos = array();
@@ -74,11 +74,11 @@ class ServicoController extends Controller
         
         // Atualizando
         $servico = Servico::find($id)->update([
-            'nome',
-            'valorBase'
+            'nome' => $request->nome,
+            'valorBase' => $request->valorBase
         ]);
 
-        return response()->json($servico);
+        return response()->json(['msg' => 'Serviço atualizado com sucesso.']);
     }
     //
 
