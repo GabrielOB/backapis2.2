@@ -59,7 +59,7 @@ class ServicoController extends Controller
         foreach ($usuario->servicos as $servico) {
             $arrayServicos[] = $servico;
         }
-        return response()->json($arrayServicos);
+        return response()->json($usuario);
     }
 
     public function atualizarServico($id, Request $request){
