@@ -35,6 +35,16 @@ $router->group(['prefix' => 'usuario'], function () use($router){
     $router->get('/{id}/comentario/{id_comentario}', 'ComentarioController@showOne');
 
     $router->get('/{id}/comentario', 'ComentarioController@showAll');
+
+    $router->get('/{id}/contrato', 'ContratoController@index');
+
+    $router->get('/{id}/contrato/{id_contrato}', 'ContratoController@show');
+
+    $router->post('/{id}/contrato', 'ContratoController@store');
+
+    $router->put('/{id}/contrato/{id_contrato}', 'ContratoController@update');
+
+    $router->delete('/{id}/contrato/{id_contrato}', 'ContratoController@delete');
 });
 
 
