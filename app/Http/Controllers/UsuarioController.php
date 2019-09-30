@@ -39,11 +39,11 @@ class UsuarioController extends Controller
         return response()->json(compact('token'));
     }
 
-    public function mostrarUsuarioAutenticado(){
-        $usuario = Auth::user();
+    // public function mostrarUsuarioAutenticado(){
+    //     $usuario = Auth::user();
 
-        return response()->json($usuario);
-    }
+    //     return response()->json($usuario);
+    // }
 
     public function mostrarTodosUsuarios(){
         return response()->json(Usuario::all());

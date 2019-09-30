@@ -54,7 +54,11 @@ class ServicoController extends Controller
 
     //  fazer
     public function mostrarServico(){
-        return response()->json(Servico::all());
+        $arrayServicos = array();
+        foreach ($usuario->servicos as $servico) {
+            $arrayServicos[] = $servico;
+        }
+        return response()->json($arrayServicos);
     }
 
     public function atualizarServico($id, Request $request){
