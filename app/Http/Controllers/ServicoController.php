@@ -54,6 +54,7 @@ class ServicoController extends Controller
 
     //  fazer
     public function mostrarServico(){
+        $usuario = Auth::user();
         $arrayServicos = array();
         foreach ($usuario->servicos as $servico) {
             $arrayServicos[] = $servico;
