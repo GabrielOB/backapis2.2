@@ -22,9 +22,9 @@ $router->group(['prefix' => 'usuario'], function () use($router){
 
     $router->get('/{id}', 'UsuarioController@mostrarUsuario');
 
-    $router->put('/{id}/atualizar', 'UsuarioController@atualizarUsuario');
+    $router->put('/{id}', 'UsuarioController@atualizarUsuario');
 
-    $router->delete('/{id}/deletar', 'UsuarioController@deletarUsuario');
+    $router->delete('/{id}', 'UsuarioController@deletarUsuario');
 
     $router->post('/{id}/comentario', 'ComentarioController@cadastrarComentario');
 
@@ -49,9 +49,9 @@ $router->group(['prefix' => 'servico'], function () use($router){
 
     $router->get('/listar', 'ServicoController@mostrarServico');
 
-    $router->put('/{id}/atualizar', 'ServicoController@atualizarServico');
+    $router->put('/{id}', 'ServicoController@atualizarServico');
 
-    $router->delete('/{id}/deletar', 'ServicoController@deletarServico');
+    $router->delete('/{id}', 'ServicoController@deletarServico');
 });
 
 $router->get('/servicos', 'ServicoController@mostrarTodosServicos');
