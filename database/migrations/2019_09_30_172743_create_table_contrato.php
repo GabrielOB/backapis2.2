@@ -22,9 +22,9 @@ class CreateTableContrato extends Migration
             $table->date('data');
             $table->float('valor');
             $table->text('descricao');
-            $table->unsignedBigInteger('status');
-            $table->boolean('conf_cli');
-            $table->boolean('conf_pre');
+            $table->unsignedBigInteger('status')->default(1);
+            $table->boolean('conf_cli')->default(false);
+            $table->boolean('conf_pre')->default(false);
             $table->timestamps();
 
             $table->foreign('id_cliente')->references('id')->on('usuarios');
@@ -40,6 +40,6 @@ class CreateTableContrato extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_contrato');
+        Schema::dropIfExists('contratos');
     }
 }
