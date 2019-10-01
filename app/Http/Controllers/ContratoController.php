@@ -8,7 +8,7 @@ use Tymon\JWTAuth\JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class ComentarioController extends Controller
+class ContratoController extends Controller
 {
     protected $jwt;
 
@@ -23,7 +23,7 @@ class ComentarioController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function cadastrarContrato(Request $resquest){
+    public function store(Request $resquest){
         // $usuario = Auth::user();
 
         $this->validate($resquest, [
@@ -33,65 +33,56 @@ class ComentarioController extends Controller
             'data',
             'valor',
             'descricao',
-            'status',
-            'conf_cliente',
-            'conf_prestador'
         ]);
 
         $contrato = Contrato::create([
             'id_prestador' => $resquest->id_prestador,
             'id_cliente' => Auth::user()->id,
-            'id_servico' => $resquest->id_service,
+            'id_servico' => $resquest->id_servico,
             'hora' => $resquest->hora,
             'data' => $resquest->data,
             'valor' => $resquest->valor,
-            'descricao' => $resquest->descricao,
-            'status' => $resquest->status,
-            'conf_prestador' => $resquest->conf_prestador,
-            'conf_cliente' => $resquest->conf_cliente
+            'descricao' => $resquest->descricao
         ]);
         return response()->json($contrato);
 
     }
 
-    public function atualizarContrato($id, Request $resquest){
+    public function update($id_contrato, Request $resquest){
         $this->validate($resquest, [
             'hora',
             'data',
             'valor',
             'descricao',
             'status',
-            'conf_cliente',
-            'conf_prestador'
+            'conf_cli',
+            'conf_pre'
         ]);
 
-        $comentario = Comentario::find($id)->update([
-            'id_prestador' => $resquest->id_prestador,
-            'id_cliente' => Auth::user()->id,
-            'id_servico' => $resquest->id_service,
+        $contrato = Contrato::find($id_contrato);
+        $contrato->update([
             'hora' => $resquest->hora,
             'data' => $resquest->data,
             'valor' => $resquest->valor,
             'descricao' => $resquest->descricao,
             'status' => $resquest->status,
-            'conf_prestador' => $resquest->conf_prestador,
-            'conf_cliente' => $resquest->conf_cliente
+            'conf_pre' => $resquest->conf_pre,
+            'conf_cli' => $resquest->conf_cli
         ]);
-        return response()->json($comentario);
+        return response()->json($contrato);
     }
 
-    public function deletarContrato($id, Request $resquest){
-        Comentario::find($id)->delete();
+    public function delete($id_contrato){
+        Contrato::find($id_contrato)->delete();
         return response()->json(['msg' => 'Deletado com sucesso'], 200);
     }
 
-    public function showOne($id_comentario, Request $resquest){
-        $comentario = Comentario::find($id_comentario);
-        return response()->json($comentario);
+    public function show($id_contrato){
+        $contrato = Contrato::find($id_contrato);
+        return response()->json($contrato);
     }
 
-    public function showAll(){
-        return response()->json(Comentario::all());
-
+    public function index(){
+        return response()->json(Contrato::where('id_cliente', '=', Auth::user()->id)->get());
     }
 }
