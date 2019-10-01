@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Contrato extends Model
 {
    protected $fillable = [
-        'id', 'id_prestador', 'id_cliente', 'id_servico', 'hora', 'data', 'valor', 'descricao', 'status', 'conf_prestador', 'conf_cliente'
+        'id', 'id_prestador', 'id_cliente', 'id_servico', 'hora', 'data', 'valor', 'descricao', 'status', 'conf_pre', 'conf_cli'
    ];
 
    protected $casts = [
