@@ -45,6 +45,16 @@ $router->group(['prefix' => 'usuario'], function () use($router){
     $router->put('/{id}/contrato/{id_contrato}', 'ContratoController@update');
 
     $router->delete('/{id}/contrato/{id_contrato}', 'ContratoController@delete');
+
+    $router->group(['prefix' => '{id}/prestador'], function() use($router){
+        $router->post('/', 'PrestadorController@store');
+
+        $router->get('/', 'PrestadorController@show');
+
+        $router->delete('/', 'PrestadorController@delete');
+
+        $router->put('/', 'PrestadorController@update');
+    });
 });
 
 
