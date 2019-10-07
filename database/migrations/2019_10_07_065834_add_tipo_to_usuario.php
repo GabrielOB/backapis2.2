@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServicoTable extends Migration
+class AddTipoToUsuario extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateServicoTable extends Migration
      */
     public function up()
     {
-        Schema::create('servicos', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('nome');
-            $table->float('valorBase');
-            $table->timestamps();
+        Schema::table('usuarios', function (Blueprint $table) {
+            $table->integer('tipo')->default(1);
         });
     }
 
@@ -28,6 +25,8 @@ class CreateServicoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('servicos');
+        Schema::table('usuarios', function (Blueprint $table) {
+            //
+        });
     }
 }
