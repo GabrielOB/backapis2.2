@@ -55,6 +55,12 @@ $router->group(['prefix' => 'usuario'], function () use($router){
 
         $router->put('/', 'PrestadorController@update');
     });
+
+    $router->post('/{id}/avaliacao', 'AvaliacaoController@cadastrarAvaliacao');
+
+    $router->get('/{id}/showAll', 'AvaliacaoController@mostrarAvaliacao');
+
+    $router->delete('/{id_avaliacao}/deleteAvaliacao', 'AvaliacaoController@deletarAvaliacao');
 });
 
 
