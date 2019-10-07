@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Avaliacao extends Model
 {
    protected $fillable = [
-        'id', 'prestador_id', 'cliente_id', 'nota', 'conteudo'
+        'id', 'id_prestador', 'id_cliente', 'nota', 'conteudo'
    ];
 
 }
