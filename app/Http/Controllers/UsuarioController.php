@@ -36,7 +36,10 @@ class UsuarioController extends Controller
             return response()->json(['Usuario não encontrado'], 404);
         }
 
-        return response()->json(compact('token'));
+        // $usuario = Usuario::where([['email', '=', $request->email], ['password', '=', Hash::make($request->password)]])->get();
+
+        return response()->json(['token' => $token, 'usuario' => Auth::user()]);
+        // return response()->json(compact('token'));
     }
 
     // public function mostrarUsuarioAutenticado(){
@@ -57,7 +60,8 @@ class UsuarioController extends Controller
             'password' => 'required',
             'cpf' => 'required',
             'endereco' => 'required',
-            'telefone' => 'required'
+            'telefone' => 'required',
+            'tipo' => 'nullable'
         ]);
 
 
@@ -69,10 +73,13 @@ class UsuarioController extends Controller
         $usuario->cpf = $request->cpf;
         $usuario->telefone = $request->telefone;
         $usuario->endereco = $request->endereco;
+        $usuario->tipo = isset($request->tipo) ? $request->tipo : 1;
 
         //Salvar registro no banco
         $usuario->save();
-        return response()->json($usuario);
+
+        $token = $this->jwt->claims(['email' => $request->email])->attempt($request->only('email', 'password'));
+        return response()->json(["usuario" => $usuario, "token" => $token]);
     }
 
     public function mostrarUsuario($id){
