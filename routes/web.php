@@ -26,25 +26,33 @@ $router->group(['prefix' => 'usuario'], function () use($router){
 
     $router->delete('/{id}', 'UsuarioController@deletarUsuario');
 
-    $router->post('/{id}/comentario', 'ComentarioController@cadastrarComentario');
+    $router->get('/prestadores', 'UsuarioController@listarPrestadores');
 
-    $router->put('/{id}/comentario', 'ComentarioController@atualizarComentario');
+    $router->get('/clientes', 'UsuarioController@listarClientes');
 
-    $router->delete('/{id}/comentario', 'ComentarioController@deletarComentario');
+    $router->group(['prefix' => '{id}/comentario'], function() use($router){
+        $router->post('/', 'ComentarioController@cadastrarComentario');
+    
+        $router->put('/', 'ComentarioController@atualizarComentario');
+    
+        $router->delete('/', 'ComentarioController@deletarComentario');
+    
+        $router->get('/{id_comentario}', 'ComentarioController@showOne');
+    
+        $router->get('/', 'ComentarioController@showAll');
+    });
 
-    $router->get('/{id}/comentario/{id_comentario}', 'ComentarioController@showOne');
-
-    $router->get('/{id}/comentario', 'ComentarioController@showAll');
-
-    $router->get('/{id}/contrato', 'ContratoController@index');
-
-    $router->get('/{id}/contrato/{id_contrato}', 'ContratoController@show');
-
-    $router->post('/{id}/contrato', 'ContratoController@store');
-
-    $router->put('/{id}/contrato/{id_contrato}', 'ContratoController@update');
-
-    $router->delete('/{id}/contrato/{id_contrato}', 'ContratoController@delete');
+    $router->group(['prefix' => '{id}/contrato'], function() use($router){
+        $router->get('/', 'ContratoController@index');
+    
+        $router->get('/{id_contrato}', 'ContratoController@show');
+    
+        $router->post('/', 'ContratoController@store');
+    
+        $router->put('/{id_contrato}', 'ContratoController@update');
+    
+        $router->delete('/{id_contrato}', 'ContratoController@delete');
+    });
 
     $router->group(['prefix' => '{id}/prestador'], function() use($router){
         $router->post('/', 'PrestadorController@store');

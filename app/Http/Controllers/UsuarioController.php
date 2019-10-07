@@ -116,5 +116,15 @@ class UsuarioController extends Controller
         return response()->json('Categoria deletada com sucesso.');
     }
 
+    public function listarPrestadores(Request $request){
+        $prestadores = Usuario::where('tipo', 2)->get();
+        return response()->json($prestadores);
+    }
+
+    public function listarClientes(Request $request){
+        $clientes = Usuario::where('tipo', 1)->get();
+        return response()->json($clientes);
+    }
+
 }
 
