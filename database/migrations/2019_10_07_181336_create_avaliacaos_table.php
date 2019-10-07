@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAvaliacoesTable extends Migration
+class CreateAvaliacaosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAvaliacoesTable extends Migration
      */
     public function up()
     {
-        Schema::create('avaliacoes', function (Blueprint $table) {
+        Schema::create('avaliacaos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_cliente');
             $table->unsignedBigInteger('id_prestador');
