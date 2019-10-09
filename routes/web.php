@@ -17,6 +17,10 @@ $router->get('/', function () use ($router) {
 
 $router->get('/usuarios', 'UsuarioController@mostrarTodosUsuarios');
 
+    $router->get('/prestadores', 'UsuarioController@listarPrestadores');
+
+    $router->get('/clientes', 'UsuarioController@listarClientes');
+
 $router->group(['prefix' => 'usuario'], function () use($router){
     $router->post('/cadastrar', 'UsuarioController@cadastrarUsuario');
 
@@ -25,10 +29,6 @@ $router->group(['prefix' => 'usuario'], function () use($router){
     $router->put('/{id}', 'UsuarioController@atualizarUsuario');
 
     $router->delete('/{id}', 'UsuarioController@deletarUsuario');
-
-    $router->get('/prestadores', 'UsuarioController@listarPrestadores');
-
-    $router->get('/clientes', 'UsuarioController@listarClientes');
 
     $router->group(['prefix' => '{id}/comentario'], function() use($router){
         $router->post('/', 'ComentarioController@cadastrarComentario');
