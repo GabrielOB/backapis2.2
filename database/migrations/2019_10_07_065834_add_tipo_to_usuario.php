@@ -14,7 +14,7 @@ class AddTipoToUsuario extends Migration
     public function up()
     {
         Schema::table('usuarios', function (Blueprint $table) {
-            $table->integer('tipo')->default(1);
+            $table->boolean('prestador')->default(false);
         });
     }
 

@@ -42,12 +42,11 @@ class UsuarioController extends Controller
         // return response()->json(compact('token'));
     }
 
-    // public function mostrarUsuarioAutenticado(){
-    //     $usuario = Auth::user();
+    public function mostrarUsuarioAutenticado(){
+        return response()->json(Auth::user());
+    }
 
-    //     return response()->json($usuario);
-    // }
-
+    //dev
     public function mostrarTodosUsuarios(){
         return response()->json(Usuario::all());
     }
@@ -61,7 +60,7 @@ class UsuarioController extends Controller
             'cpf' => 'required',
             'endereco' => 'required',
             'telefone' => 'required',
-            'tipo' => 'nullable'
+            'prestador' => 'nullable'
         ]);
 
 
@@ -73,7 +72,7 @@ class UsuarioController extends Controller
         $usuario->cpf = $request->cpf;
         $usuario->telefone = $request->telefone;
         $usuario->endereco = $request->endereco;
-        $usuario->tipo = isset($request->tipo) ? $request->tipo : 1;
+        $usuario->prestador = isset($request->prestador) ? $request->prestador : false;
 
         //Salvar registro no banco
         $usuario->save();
@@ -82,6 +81,7 @@ class UsuarioController extends Controller
         return response()->json(["usuario" => $usuario, "token" => $token]);
     }
 
+    //dev
     public function mostrarUsuario($id){
         return response()->json(Usuario::find($id));
     }
@@ -117,12 +117,13 @@ class UsuarioController extends Controller
     }
 
     public function listarPrestadores(Request $request){
-        $prestadores = Usuario::where('tipo', 2)->get();
+        $prestadores = Usuario::where('prestador', true)->join('prestadors', 'prestadors.id_usuario', '=', 'usuarios.id')->get();
         return response()->json($prestadores);
     }
 
+    //dev
     public function listarClientes(Request $request){
-        $clientes = Usuario::where('tipo', 1)->get();
+        $clientes = Usuario::where('prestador', false)->get();
         return response()->json($clientes);
     }
 
