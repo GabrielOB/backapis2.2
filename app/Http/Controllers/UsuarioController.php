@@ -117,7 +117,8 @@ class UsuarioController extends Controller
     }
 
     public function listarPrestadores(Request $request){
-        $prestadores = Usuario::where('prestador', true)->join('prestadors', 'prestadors.id_usuario', '=', 'usuarios.id')->get();
+        // $prestadores = Usuario::where('prestador', true)->join('prestadors', 'prestadors.id_usuario', '=', 'usuarios.id')->get();
+        $prestadores = Usuario::where('prestador', true)->get();
         return response()->json($prestadores);
     }
 
