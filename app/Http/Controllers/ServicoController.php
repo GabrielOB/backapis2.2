@@ -55,8 +55,7 @@ class ServicoController extends Controller
     
     public function mostrarServico($id){
         $usuario = Usuario::find($id);
-        return response()->json($usuario->servicos()->get());
-    }
+        return response()->json($usuario->servicos()->get());    }
 
     public function atualizarServico($id, Request $request){
         // validando
