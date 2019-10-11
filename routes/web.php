@@ -81,7 +81,7 @@ $router->post('/logout', 'UsuarioController@usuarioLogout');
 $router->group(['prefix' => 'servico'], function () use($router){
     $router->post('/cadastrar', 'ServicoController@cadastrarServico');
 
-    $router->get('/listar', 'ServicoController@mostrarTodosServicos');
+    $router->get('/{id}/listar', 'ServicoController@mostrarServico');
 
     $router->put('/{id}', 'ServicoController@atualizarServico');
 
