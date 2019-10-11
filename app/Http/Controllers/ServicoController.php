@@ -53,16 +53,9 @@ class ServicoController extends Controller
     }
 
     
-    public function mostrarServico(){
-        $usuario = Auth::user();
-        $arrayServicos = array();
-        foreach ($usuario->servicos as $servico) {
-            unset($servico['pivot']);
-            unset($servico['created_at']);
-            unset($servico['updated_at']);
-            $arrayServicos[] = $servico;
-        }
-        return response()->json($arrayServicos);
+    public function mostrarServico($id){
+        $usuario = Usuario::find($id);
+        return response()->json($usuario->servicos()->get());
     }
 
     public function atualizarServico($id, Request $request){
