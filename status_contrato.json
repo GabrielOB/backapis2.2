@@ -1,0 +1,9 @@
+{
+    "1": "Em aberto",
+    "2": "Em andamento",
+    "3": "Recusado pelo prestador",
+    "4": "Cancelado pelo cliente",
+    "5": "Cancelado pelo prestador",
+    "6": "Concluido"
+    //"7": "Em disputa"
+}

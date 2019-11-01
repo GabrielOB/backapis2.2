@@ -18,7 +18,7 @@ class CreatePrestadorTable extends Migration
             $table->unsignedBigInteger('id_usuario');
             $table->text('descricao');
             $table->float('nota')->default(0.0);
-            $table->integer('tipo')->default(1);
+            $table->integer('tipo')->default(1);//2 para empresa
             $table->timestamps();
         });
     }

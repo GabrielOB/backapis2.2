@@ -50,24 +50,24 @@ class ContratoController extends Controller
 
     public function update($id_contrato, Request $resquest){
         $this->validate($resquest, [
-            'hora',
-            'data',
-            'valor',
-            'descricao',
-            'status',
-            'conf_cli',
-            'conf_pre'
+            'hora' => 'nullable',
+            'data' => 'nullable',
+            'valor' => 'nullable',
+            'descricao' => 'nullable',
+            'status' => 'nullable',
+            'conf_cli' => 'nullable',
+            'conf_pre' => 'nullable'
         ]);
 
         $contrato = Contrato::find($id_contrato);
         $contrato->update([
-            'hora' => $resquest->hora,
-            'data' => $resquest->data,
-            'valor' => $resquest->valor,
-            'descricao' => $resquest->descricao,
-            'status' => $resquest->status,
-            'conf_pre' => $resquest->conf_pre,
-            'conf_cli' => $resquest->conf_cli
+            'hora' => isset($resquest->hora) ? $resquest->hora : $contrato->hora,
+            'data' => isset($resquest->data) ? $resquest->data : $contrato->data,
+            'valor' => isset($resquest->valor) ? $resquest->valor : $contrato->valor,
+            'descricao' => isset($resquest->descricao) ? $resquest->descricao : $contrato->descricao,
+            'status' => isset($resquest->status) ? $resquest->status : $contrato->status,
+            'conf_pre' => isset($resquest->conf_pre) ? $resquest->conf_pre : $contrato->conf_pre,
+            'conf_cli' => isset($resquest->conf_cli) ? $resquest->conf_cli : $contrato->conf_cli
         ]);
         return response()->json($contrato);
     }
