@@ -60,15 +60,7 @@ class ContratoController extends Controller
         ]);
 
         $contrato = Contrato::find($id_contrato);
-        $contrato->update([
-            'hora' => isset($resquest->hora) ? $resquest->hora : $contrato->hora,
-            'data' => isset($resquest->data) ? $resquest->data : $contrato->data,
-            'valor' => isset($resquest->valor) ? $resquest->valor : $contrato->valor,
-            'descricao' => isset($resquest->descricao) ? $resquest->descricao : $contrato->descricao,
-            'status' => isset($resquest->status) ? $resquest->status : $contrato->status,
-            'conf_pre' => isset($resquest->conf_pre) ? $resquest->conf_pre : $contrato->conf_pre,
-            'conf_cli' => isset($resquest->conf_cli) ? $resquest->conf_cli : $contrato->conf_cli
-        ]);
+        $contrato->fill($resquest->input())->save();
         return response()->json($contrato);
     }
 
