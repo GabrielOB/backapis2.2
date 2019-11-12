@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Avaliacao;
-use App\Usuario;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\JWTAuth;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class AvaliacaoController extends Controller
 {
@@ -20,63 +18,39 @@ class AvaliacaoController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function cadastrarAvaliacao($id, Request $request){
+    public function store(Request $request){
         $user = Auth::user();
-        
-        //Validação
+
         $this->validate($request, [
             'nota' => 'required|min:1|max:5',
             'conteudo' => 'required',
-            // 'id_prestador' => 'required'
+            'id_prestador' => 'required',
         ]);
 
-        // Inserindo e salvando
         $avaliacao = Avaliacao::create([
             'nota' => $request->nota,
             'conteudo' => $request->conteudo,
-            'id_prestador' => $id,
+            'id_prestador' => $request->id_prestador,
             'id_cliente' => $user->id
         ]);
-        
+
         return response()->json($avaliacao);
     }
-    
-    public function mostrarAvaliacao($id, Request $request){
-        $usuario = Auth::user();
-        $arrayAvaliacao = array();
-        $prestador = Usuario::find($id)->avalicoes;
-        foreach ($prestador->avaliacoes as $avaliacao) {
-            // unset($servico['pivot']);
-            // unset($servico['created_at']);
-            // unset($servico['updated_at']);
-            $arrayAvaliacao[] = $avaliacao;
-        }
-        return response()->json($arrayAvaliacao);
+
+    public function index(){
+        $avaliacoes = Avaliacao::all();
+        return response()->json($avaliacoes);
+    }
+
+    public function show($id_prestador){
+        $avaliacoes = Avaliacao::where('id_prestador', $id_prestador)->get();
+        return response()->json($avaliacoes);
     }
 
 
-    /* Atualmente atualizar esta baseada  em serviço, caso precise ser implementada mudar nome e logica */
-
-    // public function atualizarServico($id, Request $request){
-    //     // validando
-    //     $this->validate($request, [
-    //         'nome',
-    //         'valorBase'
-    //     ]);
-        
-    //     // Atualizando
-    //     $servico = Servico::find($id)->update([
-    //         'nome' => $request->nome,
-    //         'valorBase' => $request->valorBase
-    //     ]);
-
-    //     return response()->json(['msg' => 'Serviço atualizado com sucesso.']);
-    // }
-
-
-    public function deletarAvaliacao($id_comentario){
-        Avaliacao::find($id_comentario)->delete();
-        return response()->json(['msg' => 'Deletado com sucesso'], 200);
+    public function delete($id_avaliacao){
+        Avaliacao::find($id_avaliacao)->delete();
+        return response()->json(['msg' => 'Deletado com sucesso'], 204);
     }
 
 }
