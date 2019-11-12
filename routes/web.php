@@ -32,25 +32,25 @@ $router->group(['prefix' => 'usuario'], function () use($router){
 
     $router->group(['prefix' => '{id}/comentario'], function() use($router){
         $router->post('/', 'ComentarioController@cadastrarComentario');
-    
+
         $router->put('/', 'ComentarioController@atualizarComentario');
-    
+
         $router->delete('/', 'ComentarioController@deletarComentario');
-    
+
         $router->get('/{id_comentario}', 'ComentarioController@showOne');
-    
+
         $router->get('/', 'ComentarioController@showAll');
     });
 
     $router->group(['prefix' => '{id}/contrato'], function() use($router){
         $router->get('/', 'ContratoController@index');
-    
+
         $router->get('/{id_contrato}', 'ContratoController@show');
-    
+
         $router->post('/', 'ContratoController@store');
-    
+
         $router->put('/{id_contrato}', 'ContratoController@update');
-    
+
         $router->delete('/{id_contrato}', 'ContratoController@delete');
     });
 
@@ -64,12 +64,36 @@ $router->group(['prefix' => 'usuario'], function () use($router){
         $router->put('/', 'PrestadorController@update');
     });
 
-    $router->post('/{id}/avaliacao', 'AvaliacaoController@cadastrarAvaliacao');
-
-    $router->get('/{id}/showAll', 'AvaliacaoController@mostrarAvaliacao');
-
-    $router->delete('/{id_avaliacao}/deleteAvaliacao', 'AvaliacaoController@deletarAvaliacao');
 });
+
+$router->group(['prefix' => 'avaliacoes'], function () use ($router){
+
+    $router->post('/', 'AvaliacaoController@store');
+
+    $router->get('/', 'AvaliacaoController@index');
+
+    $router->get('/{id_prestador}', 'AvaliacaoController@show');
+
+    $router->delete('/delete/{id_avaliacao}', 'AvaliacaoController@delete');
+
+});
+
+$router->group(['prefix' => 'chat'], function () use ($router){
+
+    $router->get('/', 'ChatController@index');
+
+    $router->get('/{id_chat}', 'ChatController@show');
+
+    $router->get('/prestador/{id_prestador}', 'ChatPrestadorController@index');
+
+    $router->get('/cliente/{id_client}', 'ChatClienteController@index');
+
+    $router->get('/mensagem/{id_chat}', 'ChatMensagemController@index');
+
+    $router->post('/', 'ChatController@store');
+
+});
+
 
 
 $router->post('/login', 'UsuarioController@usuarioLogin');
