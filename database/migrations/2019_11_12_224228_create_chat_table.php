@@ -17,6 +17,7 @@ class CreateChatTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('id_provider');
             $table->unsignedInteger('id_client');
+            $table->text('last_message')->nullable();
             $table->timestamps();
 
             $table->foreign('id_client')->references('id')->on('usuarios');
