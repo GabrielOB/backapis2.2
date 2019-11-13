@@ -7,12 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Chat extends Model
 {
     protected $fillable = [
-        'id_client', 'id_provider'
+        'last_message'
     ];
 
-    /* protected $casts = [
-        'id_usuario' => 'integer',
-        'nota' => 'float',
-        'tipo' => 'integer'
-    ]; */
 }
