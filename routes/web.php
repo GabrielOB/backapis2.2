@@ -80,17 +80,16 @@ $router->group(['prefix' => 'avaliacoes'], function () use ($router){
 
 $router->group(['prefix' => 'chat'], function () use ($router){
 
-    $router->get('/', 'ChatController@index');
-
-    $router->get('/{id_chat}', 'ChatController@show');
-
-    $router->get('/prestador/{id_prestador}', 'ChatPrestadorController@index');
-
-    $router->get('/cliente/{id_client}', 'ChatClienteController@index');
-
-    $router->get('/mensagem/{id_chat}', 'ChatMensagemController@index');
+    $router->get('/dev', 'ChatController@index');
+    $router->get('/dev/{id_chat}', 'ChatController@show');
 
     $router->post('/', 'ChatController@store');
+    $router->get('/', 'ChatUserController@index');
+
+    $router->get('/{id_chat}', 'ChatMessageController@index');
+    $router->post('/{id_chat}', 'ChatMessageController@store');
+
+
 
 });
 

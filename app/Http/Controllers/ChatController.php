@@ -17,6 +17,16 @@ class ChatController extends Controller{
         $this->middleware('auth:api');
     }
 
+    public function index(){
+        $chats = Chat::all();
+        return response()->json($chats);
+    }
+
+    public function show($id_chat){
+        $chat = Chat::find($id_chat);
+        return response()->json($chat);
+    }
+
     public function store(Request $request){
         $this->validate($request, [
             'id_provider' => 'required',
@@ -28,7 +38,7 @@ class ChatController extends Controller{
             return response()->json([
                 'error' => 'Provider not found'
             ], 400);
-        }else if(!$provider->provider){
+        }else if(!$provider->prestador){
             return response()->json([
                 'error' => 'User is not a provider'
             ], 400);
@@ -42,11 +52,11 @@ class ChatController extends Controller{
         }
 
         $chat = Chat::create([
-            'id_provider' => $provider->id,
-            'id_client' => $client->id
+            'id_provider' => $request->id_provider,
+            'id_client' => $request->id_client
         ]);
 
-        return response()->json($chat);
+        return response()->json($chat, 201);
 
     }
 }
