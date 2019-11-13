@@ -47,5 +47,14 @@ class Usuario extends Model implements AuthenticatableContract, AuthorizableCont
     public function avaliacoes(){
         return $this->hasMany('App\Avaliacao');
     }
+
+    public function providerChats(){
+        return $this->hasMany('App\Chat', 'id_provider');
+    }
+
+    public function clientChats(){
+        return $this->hasMany('App\Chat', 'id_client');
+    }
+
 }
 
