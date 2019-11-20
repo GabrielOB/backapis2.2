@@ -46,6 +46,10 @@ class ChatMessageController extends Controller{
             'content' => $request->content
         ]);
 
+        $chat->update([
+            'last_message' => $message->content
+        ]);
+
         return response()->json($message, 201);
     }
 }
