@@ -16,4 +16,12 @@ class Chat extends Model
         return $this->hasMany('App\Message', 'id_chat');
     }
 
+    public function provider(){
+        return $this->belongsTo('App\Usuario', 'id_provider');
+    }
+
+    public function client(){
+        return $this->belongsTo('App\Usuario', 'id_client');
+    }
+
 }

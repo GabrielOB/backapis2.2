@@ -20,9 +20,9 @@ class ChatUserController extends Controller{
         $user = Auth::user();
 
         if($user->prestador){
-            $chats = Chat::where('id_provider', $user->id)->get();
+            $chats = Chat::with('client:id,usuario')->where('id_provider', $user->id)->get();
         }else{
-            $chats = Chat::where('id_client', $user->id)->get();
+            $chats = Chat::with('provider:id,usuario')->where('id_client', $user->id)->get();
         }
 
         if(!count($chats)){
