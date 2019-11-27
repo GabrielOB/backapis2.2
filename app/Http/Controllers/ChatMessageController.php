@@ -27,7 +27,7 @@ class ChatMessageController extends Controller{
             ], 404);
         }
 
-        $messages = $chat->messages()->get();
+        $messages = $chat->messages()->orderBy('created_at', 'DESC')->get();
 
         return response()->json($messages);
     }
