@@ -65,7 +65,13 @@ class ContratoController extends Controller
         ]);
 
         $contrato = Contrato::find($id_contrato);
+
         $contrato->fill($resquest->input())->save();
+        if($contrato->conf_pre && $contrato->conf_cli){
+            $contrato->update([
+                'status' => 6
+            ]);
+        }
         return response()->json($contrato);
     }
 
