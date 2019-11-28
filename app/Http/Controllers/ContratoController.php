@@ -24,7 +24,11 @@ class ContratoController extends Controller
     }
 
     public function store(Request $resquest){
-        // $usuario = Auth::user();
+        $usuario = Auth::user();
+
+        if($usuario->prestador){
+            return response()->json(['error' => 'Prestadores não podem criar contratos'], 400);
+        }
 
         $this->validate($resquest, [
             'id_prestador',
@@ -37,13 +41,14 @@ class ContratoController extends Controller
 
         $contrato = Contrato::create([
             'id_prestador' => $resquest->id_prestador,
-            'id_cliente' => Auth::user()->id,
+            'id_cliente' => $usuario->id,
             'id_servico' => $resquest->id_servico,
             'hora' => $resquest->hora,
             'data' => $resquest->data,
             'valor' => $resquest->valor,
             'descricao' => $resquest->descricao
         ]);
+
         return response()->json($contrato);
 
     }
@@ -75,6 +80,12 @@ class ContratoController extends Controller
     }
 
     public function index(){
-        return response()->json(Contrato::where('id_cliente', '=', Auth::user()->id)->get());
+        $user = Auth::user();
+        if($user->prestador){
+            $contratos = Contrato::where('id_prestador', '=', $user->id)->get();
+        }else{
+            $contratos = Contrato::where('id_cliente', '=', $user->id)->get();
+        }
+        return response()->json($contratos);
     }
 }

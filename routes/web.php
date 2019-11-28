@@ -17,11 +17,11 @@ $router->get('/', function () use ($router) {
 
 $router->get('/usuarios', 'UsuarioController@mostrarTodosUsuarios');
 
-    $router->get('/prestadores', 'UsuarioController@listarPrestadores');
+$router->get('/prestadores', 'UsuarioController@listarPrestadores');
 
-    $router->get('/clientes', 'UsuarioController@listarClientes');
+$router->get('/clientes', 'UsuarioController@listarClientes');
 
-$router->group(['prefix' => 'usuario'], function () use($router){
+$router->group(['prefix' => 'usuario'], function () use ($router) {
     $router->post('/cadastrar', 'UsuarioController@cadastrarUsuario');
 
     $router->get('/{id}', 'UsuarioController@mostrarUsuario');
@@ -30,7 +30,7 @@ $router->group(['prefix' => 'usuario'], function () use($router){
 
     $router->delete('/{id}', 'UsuarioController@deletarUsuario');
 
-    $router->group(['prefix' => '{id}/comentario'], function() use($router){
+    $router->group(['prefix' => '{id}/comentario'], function () use ($router) {
         $router->post('/', 'ComentarioController@cadastrarComentario');
 
         $router->put('/', 'ComentarioController@atualizarComentario');
@@ -42,19 +42,7 @@ $router->group(['prefix' => 'usuario'], function () use($router){
         $router->get('/', 'ComentarioController@showAll');
     });
 
-    $router->group(['prefix' => '{id}/contrato'], function() use($router){
-        $router->get('/', 'ContratoController@index');
-
-        $router->get('/{id_contrato}', 'ContratoController@show');
-
-        $router->post('/', 'ContratoController@store');
-
-        $router->put('/{id_contrato}', 'ContratoController@update');
-
-        $router->delete('/{id_contrato}', 'ContratoController@delete');
-    });
-
-    $router->group(['prefix' => '{id}/prestador'], function() use($router){
+    $router->group(['prefix' => '{id}/prestador'], function () use ($router) {
         $router->post('/', 'PrestadorController@store');
 
         $router->get('/', 'PrestadorController@show');
@@ -63,10 +51,21 @@ $router->group(['prefix' => 'usuario'], function () use($router){
 
         $router->put('/', 'PrestadorController@update');
     });
-
 });
 
-$router->group(['prefix' => 'avaliacoes'], function () use ($router){
+$router->group(['prefix' => 'contrato'], function () use ($router) {
+    $router->get('/', 'ContratoController@index');
+
+    $router->get('/{id_contrato}', 'ContratoController@show');
+
+    $router->post('/', 'ContratoController@store');
+
+    $router->put('/{id_contrato}', 'ContratoController@update');
+
+    $router->delete('/{id_contrato}', 'ContratoController@delete');
+});
+
+$router->group(['prefix' => 'avaliacoes'], function () use ($router) {
 
     $router->post('/', 'AvaliacaoController@store');
 
@@ -75,10 +74,9 @@ $router->group(['prefix' => 'avaliacoes'], function () use ($router){
     $router->get('/{id_prestador}', 'AvaliacaoController@show');
 
     $router->delete('/delete/{id_avaliacao}', 'AvaliacaoController@delete');
-
 });
 
-$router->group(['prefix' => 'chat'], function () use ($router){
+$router->group(['prefix' => 'chat'], function () use ($router) {
 
     $router->get('/dev', 'ChatController@index');
     $router->get('/dev/{id_chat}', 'ChatController@show');
@@ -88,9 +86,6 @@ $router->group(['prefix' => 'chat'], function () use ($router){
 
     $router->get('/{id_chat}', 'ChatMessageController@index');
     $router->post('/{id_chat}', 'ChatMessageController@store');
-
-
-
 });
 
 
@@ -101,7 +96,7 @@ $router->get('/info', 'UsuarioController@mostrarUsuarioAutenticado');
 
 $router->post('/logout', 'UsuarioController@usuarioLogout');
 
-$router->group(['prefix' => 'servico'], function () use($router){
+$router->group(['prefix' => 'servico'], function () use ($router) {
     $router->post('/cadastrar', 'ServicoController@cadastrarServico');
 
     $router->get('/{id}/listar', 'ServicoController@mostrarServico');
