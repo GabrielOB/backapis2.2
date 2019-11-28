@@ -87,11 +87,9 @@ class UsuarioController extends Controller
     }
 
     public function atualizarUsuario($id, Request $request){
-        $usuario = Usuario::find($id)->update([
-            'email' => $request->email,
-            'usuario' => $request->usuario,
-            'password' => $request->password
-        ]);
+        $usuario = Usuario::find($id);
+
+        $usuario->fill($request->input())->save();
 
         return response()->json($usuario);
     }
